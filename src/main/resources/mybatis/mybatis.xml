@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.test_springboot.infra.mapper.SpringbootMapper">
+
+
+    <resultMap id="stu" type="com.example.test_springboot.domain.entity.Student">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="sex" property="sex"/>
+        <result column="age" property="age"/>
+    </resultMap>
+
+    <resultMap id="tea" type="com.example.test_springboot.domain.entity.Teacher">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="sex" property="sex"/>
+        <result column="age" property="age"/>
+    </resultMap>
+
+    <resultMap id="course" type="com.example.test_springboot.domain.entity.Course">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="tid" property="tid"/>
+    </resultMap>
+
+    <resultMap id="achievement" type="com.example.test_springboot.domain.entity.Achievement">
+        <id column="id" property="id"/>
+        <result column="sid" property="sid"/>
+        <result column="cid" property="cid"/>
+        <result column="score" property="score"/>
+    </resultMap>
+
+    <resultMap id="stu_course_ach" type="com.example.test_springboot.domain.entity.student.StudentTranscript">
+        <association property="student" javaType="com.example.test_springboot.domain.entity.Student">
+            <id column="id" property="id"/>
+            <result column="name" property="name"/>
+            <result column="sex" property="sex"/>
+            <result column="age" property="age"/>
+        </association>
+        <association property="course" javaType="com.example.test_springboot.domain.entity.Course">
+            <result column="title" property="title"/>
+        </association>
+        <association property="achievement" javaType="com.example.test_springboot.domain.entity.Achievement">
+            <result column="score" property="score"/>
+        </association>
+    </resultMap>
+
+    <!--    获取学生课程成绩-->
+    <select id="getStuAch" resultMap="stu_course_ach">
+        SELECT s.*, c.title, a.score
+        FROM student s
+                 LEFT JOIN achievement a on s.id = a.sid
+                 LEFT JOIN course c on c.id = a.cid
+        WHERE s.id = #{sid}
+    </select>
+
+    <!--    获取所有学生课程成绩-->
+    <select id="getAllStuAch" resultMap="stu_course_ach">
+        SELECT s.*, c.title, a.score
+        FROM student s
+                 LEFT JOIN achievement a on s.id = a.sid
+                 LEFT JOIN course c on c.id = a.cid
+    </select>
+    <!--    获取学生-->
+    <select id="getStu" resultMap="stu">
+        SELECT *
+        FROM student
+        WHERE id = #{id}
+    </select>
+
+    <!--    添加学生成绩-->
+    <insert id="insertScore" >
+        insert into achievement (sid, cid, score)
+        values
+        <foreach collection="list" item="achievement" separator=",">
+            (
+            <if test="achievement.sid != null">
+                #{achievement.sid},
+            </if>
+            <if test="achievement.cid != null">
+                #{achievement.cid},
+            </if>
+            <if test="achievement.score != null">
+                #{achievement.score}
+            </if>
+            )
+        </foreach>
+    </insert>
+
+
+
+</mapper>

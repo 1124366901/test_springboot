@@ -25,7 +25,13 @@ spring:
     username: hzero
     password: Q4E%kizUy2#m
     url: jdbc:mysql://192.168.56.201:3306/springboot_test?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    encoding: UTF-8
+    mode: HTML5
 
 mybatis:
   type-aliases-package: com.example.test_springboot.domain.entity
   mapper-locations: classpath:mybatis/*.xml
+

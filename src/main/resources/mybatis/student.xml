@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.test_springboot.infra.mapper.StudentMapper">
+
+
+    <resultMap id="stu" type="com.example.test_springboot.domain.entity.Student">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="sex" property="sex"/>
+        <result column="age" property="age"/>
+    </resultMap>
+    <!--    获取学生-->
+    <select id="getAllStu" resultMap="stu">
+        SELECT *
+        FROM student
+    </select>
+
+    <!--    修改学生信息-->
+    <update id="changeInfo">
+        update student
+        set name=#{name},
+            age=#{age},
+            sex=#{sex}
+        where id = #{id}
+    </update>
+    <!--    删除学生信息-->
+    <delete id="deleteStu">
+        delete
+        from student
+        where id = #{id}
+    </delete>
+    <!--    添加学生信息-->
+    <insert id="addStu">
+        insert into student(name, sex, age)
+        values (#{name}, #{sex}, #{age})
+    </insert>
+
+</mapper>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div style="display: flex">
+    <div style="flex: 1">
+        <h1>学生表</h1>
+        <table border="1" style="text-align: center">
+            <thead>
+            <tr>
+                <th style="width: 50px;">编号</th>
+                <th style="width: 50px;">ID</th>
+                <th style="width: 100px;">姓名</th>
+                <th style="width: 50px;">性别</th>
+                <th style="width: 50px;">年龄</th>
+                <th style="width: 180px;">修改</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="msg,index:${AllStudents}">
+                <td th:text="${index.index}+1"></td>
+                <td th:text="${msg.getId()}"></td>
+                <td th:text="${msg.getName()}"></td>
+                <td th:text="${msg.getSex()}"></td>
+                <td th:text="${msg.getAge()}"></td>
+                <td>
+                    <button th:id="'btn-' + ${index}"
+                            th:attr="data-id=${msg.getId()}, data-name=${msg.getName()}, data-sex=${msg.getSex()}, data-age=${msg.getAge()}"
+                            onclick="changeStuInfo(this)">修改
+                    </button>&nbsp;&nbsp;&nbsp;
+                    <button th:id="'btn-' + ${index}"
+                            th:attr="data-id=${msg.getId()}"
+                            onclick="deleteStu(this.getAttribute('data-id'))">删除
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <h1>修改信息</h1>
+        <form th:action="@{/changeStuInfo}" method="post">
+            <p>ID: <input id="stuID" type="text" name="id" readonly> &nbsp;&nbsp;&nbsp;
+            <p>Name: <input id="stuName" name="name" type="text">
+            <p>sex: <input id="stuSex" name="sex" type="text"> &nbsp;&nbsp;&nbsp;
+            <p>age: <input id="stuAge" name="age" type="text"><br>
+                <input type="submit" value="提交修改">
+        </form>
+        <div>
+            <h1>添加学生</h1>
+            <form th:action="@{/addStuInfo}" method="post">
+                <p>Name: <input id="stuNameAdd" name="name" type="text">
+                <p>sex: <input id="stuSexAdd" name="sex" type="text"> &nbsp;&nbsp;&nbsp;
+                <p>age: <input id="stuAgeAdd" name="age" type="text"><br>
+                    <input type="submit" value="添加学生">
+            </form>
+        </div>
+    </div>
+    <div style="flex: 1">
+        <h1>添加成绩</h1>
+    </div>
+</div>
+
+
+</body>
+<script th:inline="javascript">
+
+
+    function changeStuInfo(msg) {
+        var studentId = msg.getAttribute('data-id');
+        var studentName = msg.getAttribute('data-name');
+        var studentSex = msg.getAttribute('data-sex');
+        var studentAge = msg.getAttribute('data-age');
+        document.getElementById("stuID").value = studentId
+        document.getElementById("stuName").value = studentName
+        document.getElementById("stuSex").value = studentSex
+        document.getElementById("stuAge").value = studentAge
+    }
+
+    function deleteStu(id) {
+        if (confirm("确定要删除ID:" + id + "吗？")) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/deleteStu?id=" + id, true);
+            xhr.send();
+            setTimeout(function () {
+                location.reload();
+            }, 1600);
+        }
+    }
+</script>
+</html>

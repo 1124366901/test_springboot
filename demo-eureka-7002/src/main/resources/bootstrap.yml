@@ -1,0 +1,10 @@
+server:
+  port: 7002
+eureka:
+  instance:
+    hostname: demo-eureka-7002
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://demo-eureka-7001:7001/eureka/,http://demo-eureka-7003:7003/eureka/

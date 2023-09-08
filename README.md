@@ -38,9 +38,16 @@
     </insert>
 
     ![image](https://github.com/1124366901/test_springboot/assets/109325641/f5c1da09-9c89-49bd-ac29-635e255c480f)
+
+
+  
+    
 ![image](https://github.com/1124366901/test_springboot/assets/109325641/85cbb830-a7ee-47b0-ad5c-9f6a64b15155)
 ![image](https://github.com/1124366901/test_springboot/assets/109325641/fb2fefbc-ffca-4d83-b206-e7d2879af8a7)
 
 插入：
 ![image](https://github.com/1124366901/test_springboot/assets/109325641/b6bf0237-4c2b-4564-b410-f578f65be77a)
+
+  前端页面的完成 增删改查功能完成
+![image](https://github.com/1124366901/test_springboot/assets/109325641/be27c51e-9083-44f5-995d-f4939dfe0915)
 

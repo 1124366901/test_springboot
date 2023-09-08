@@ -51,3 +51,6 @@
   前端页面的完成 增删改查功能完成
 ![image](https://github.com/1124366901/test_springboot/assets/109325641/be27c51e-9083-44f5-995d-f4939dfe0915)
 
+集群搭建以及测试：
+![image](https://github.com/1124366901/test_springboot/assets/109325641/a5aa9ac0-d96f-4cd8-ad4c-5d8c6b19d0ed)
+

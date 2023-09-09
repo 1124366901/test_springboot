@@ -76,14 +76,12 @@
     <div style="flex: 1">
         <h1>编辑成绩</h1>
         <p>ID: <span id="editID"></span>&nbsp;&nbsp;Name:<span id="editName"></span></p>
-        <select v-if="stuData.length>1" v-model="stuData">
-            <option v-for="(item,index) in stuData" :key="index" :label="item.course.title"
-                    :value="item.course.title"></option>
+        <select v-if="allCourse.length>1" v-model="selOne" style="width: 50px" v-on:change="getSelScore(selOne)">
+            <option v-for="(item,index) in allCourse" :key="index" :label="item.title"
+                    :value="item"></option>
         </select>
-        <!--                <select>-->
-        <!--                    <option th:each="msg:${stuScore}"-->
-        <!--                            th:text="${msg.getCourse().getTitle()}" th:value="${msg.getCourse().getTitle()}"></option>-->
-        <!--                </select>-->
+        <span>请输入分数: <input type="number" style="width: 100px" v-model="selScore"></span>
+        <button @click="submitScore" style="width: 50px">提交</button>
     </div>
 </div>
 </body>
@@ -127,11 +125,15 @@
         el: '#app',
         data: {
             stuData: '',
-        }
-        ,
+            selOne: '',
+            allCourse: '',
+            selScore: '',
+            method: 'insert',
+        },
         mounted() {
             // 将Vue方法传到全局对象window中
             window.getScore = this.getScore
+            this.getAchievementScore()
         },
         methods: {
             getScore(id) {
@@ -145,8 +147,46 @@
                     data: data,
                 }).then(response => {
                     this.stuData = response.data;
-                    console.log(this.stuData);
+                    this.getSelScore(this.selOne)
                 });
+
+            },
+            getSelScore(item) {
+                if (this.stuData[0].course !== null && this.selOne.title !== null) {
+                    let res = false
+                    for (let i = 0; i < this.stuData.length; i++) {
+                        if (item.title === this.stuData[i].course.title) {
+                            this.selScore = this.stuData[i].achievement.score
+                            res = true
+                        }
+                    }
+                    if (res) {
+                        this.method = 'update'
+                    } else {
+                        this.method = 'insert'
+                        this.selScore = 0
+                    }
+                } else {
+                    this.selScore = 0
+                    this.method = 'insert'
+                }
+
+            },
+            getAchievementScore() {
+                axios({
+                    method: 'post',
+                    url: '/getAllCourse',
+                }).then(response => {
+                    this.allCourse = response.data;
+                });
+            },
+            submitScore() {
+                const data = {
+                    "method": this.method, "id": this.stuData[0].student.id,
+                    "course": this.selOne.id, "score": this.selScore
+                }
+                axios.post("/UpdateStuScore", data).then(location.reload()
+                )
             }
         }
     })

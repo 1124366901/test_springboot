@@ -8,4 +8,6 @@ import org.apache.ibatis.annotations.Mapper;
 public interface AchievementMapper {
 
     void addStuScore(Achievement achievement);
+
+    void updateStu(Achievement achievement);
 }

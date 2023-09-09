@@ -17,4 +17,9 @@ public class AchievementServiceImpl implements AchievementService {
     public void addStuScore(Achievement achievement) {
         achievementMapper.addStuScore(achievement);
     }
+
+    @Override
+    public void updateStu(Achievement achievement) {
+        achievementMapper.updateStu(achievement);
+    }
 }

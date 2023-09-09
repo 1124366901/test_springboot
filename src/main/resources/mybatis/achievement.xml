@@ -11,12 +11,18 @@
         <result column="score" property="score"/>
     </resultMap>
 
-    <!--    选择全部课程-->
+
     <insert id="addStuScore" >
         insert into achievement(sid, cid, score)
         values (#{sid}, #{cid}, #{score})
     </insert>
 
+    <update id="updateStu">
+        update achievement
+        set score=#{score}
+        where sid = #{sid}
+          and cid = #{cid}
+    </update>
 
 
 </mapper>

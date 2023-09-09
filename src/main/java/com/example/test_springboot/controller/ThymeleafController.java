@@ -1,10 +1,12 @@
 package com.example.test_springboot.controller;
 
 import com.alibaba.fastjson2.JSON;
+import com.example.test_springboot.api.service.impl.AchievementServiceImpl;
 import com.example.test_springboot.api.service.impl.CourseServiceImpl;
 import com.example.test_springboot.api.service.impl.MybatisServiceImpl;
 import com.example.test_springboot.api.service.impl.StudentServiceImpl;
 import com.example.test_springboot.domain.entity.Achievement;
+import com.example.test_springboot.domain.entity.Course;
 import com.example.test_springboot.domain.entity.Student;
 import com.example.test_springboot.domain.entity.student.StudentTranscript;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -21,6 +23,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class ThymeleafController {
@@ -33,6 +36,9 @@ public class ThymeleafController {
 
     @Resource
     private MybatisServiceImpl mybatisService;
+
+    @Resource
+    private AchievementServiceImpl achievementService;
 
     @RequestMapping({"/", "index"})
     public String main(Model model, HttpSession session) {
@@ -75,5 +81,16 @@ public class ThymeleafController {
 //        return "redirect:/";
 //    }
 
+    @PostMapping("/UpdateStuScore")
+    public String UpdateStuScore(@RequestBody Map<String, String> jsObject) {
+        System.out.println(jsObject);
+        Achievement achievement = new Achievement(Integer.valueOf(jsObject.get("id")), Integer.valueOf(jsObject.get("course")), Integer.valueOf(jsObject.get("score")));
+        if (jsObject.get("method").equals("insert")) {
+            achievementService.addStuScore(achievement);
+        } else {
+            achievementService.updateStu(achievement);
+        }
+        return "redirect:/";
+    }
 
 }

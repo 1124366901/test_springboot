@@ -2,8 +2,10 @@ package com.example.test_springboot.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson2.JSON;
+import com.example.test_springboot.api.service.impl.CourseServiceImpl;
 import com.example.test_springboot.api.service.impl.MybatisServiceImpl;
 import com.example.test_springboot.domain.entity.Achievement;
+import com.example.test_springboot.domain.entity.Course;
 import com.example.test_springboot.domain.entity.Student;
 import com.example.test_springboot.domain.entity.student.StudentTranscript;
 import com.fasterxml.jackson.annotation.JsonAlias;
@@ -27,6 +29,9 @@ public class MybatisController {
 
     @Resource
     private MybatisServiceImpl mybatisService;
+
+    @Resource
+    private CourseServiceImpl courseService;
 
     @PostMapping("/GetStu")
     public String GetStu(String id) {
@@ -54,4 +59,11 @@ public class MybatisController {
         model.addAttribute("data",sid);
         return mybatisService.getStuAch(Integer.valueOf(JSON.parseObject(sid).get("sid").toString()));
     }
+
+    @PostMapping("/getAllCourse")
+    public List<Course> getAllCourse(){
+        return courseService.selAll();
+    }
+
+
 }

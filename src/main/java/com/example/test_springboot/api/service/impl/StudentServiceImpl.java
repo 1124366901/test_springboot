@@ -13,6 +13,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Resource
     private StudentMapper studentMapper;
+
     @Override
     public List<Student> getAllStu() {
         return studentMapper.getAllStu();
@@ -31,5 +32,10 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void addStu(Student student) {
         studentMapper.addStu(student);
+    }
+
+    @Override
+    public Student getStuByName(String name) {
+        return studentMapper.getStuByName(name);
     }
 }

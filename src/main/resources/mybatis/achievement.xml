@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.test_springboot.infra.mapper.AchievementMapper">
+
+    <resultMap id="achieve" type="com.example.test_springboot.domain.entity.Achievement">
+        <id column="id" property="id"/>
+        <result column="sid" property="sid"/>
+        <result column="cid" property="cid"/>
+        <result column="score" property="score"/>
+    </resultMap>
+
+    <!--    选择全部课程-->
+    <insert id="addStuScore" >
+        insert into achievement(sid, cid, score)
+        values (#{sid}, #{cid}, #{score})
+    </insert>
+
+
+
+</mapper>

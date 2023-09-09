@@ -4,9 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js" type="text/javascript"></script>
 </head>
 <body>
-<div style="display: flex">
+<div id="app" style="display: flex">
     <div style="flex: 1">
         <h1>学生表</h1>
         <table border="1" style="text-align: center">
@@ -17,7 +19,7 @@
                 <th style="width: 100px;">姓名</th>
                 <th style="width: 50px;">性别</th>
                 <th style="width: 50px;">年龄</th>
-                <th style="width: 180px;">修改</th>
+                <th style="width: 180px;">操作</th>
             </tr>
             </thead>
             <tbody>
@@ -28,13 +30,17 @@
                 <td th:text="${msg.getSex()}"></td>
                 <td th:text="${msg.getAge()}"></td>
                 <td>
-                    <button th:id="'btn-' + ${index}"
+                    <button th:id="'btn1-' + ${index}"
                             th:attr="data-id=${msg.getId()}, data-name=${msg.getName()}, data-sex=${msg.getSex()}, data-age=${msg.getAge()}"
                             onclick="changeStuInfo(this)">修改
                     </button>&nbsp;&nbsp;&nbsp;
-                    <button th:id="'btn-' + ${index}"
+                    <button th:id="'btn2-' + ${index}"
                             th:attr="data-id=${msg.getId()}"
                             onclick="deleteStu(this.getAttribute('data-id'))">删除
+                    </button>
+                    <button th:id="'btn3-' + ${index}"
+                            th:attr="data-id=${msg.getId()},data-name=${msg.getName()}"
+                            onclick="getStuID(this.getAttribute('data-id'),this.getAttribute('data-name'))">编辑成绩
                     </button>
                 </td>
             </tr>
@@ -48,25 +54,42 @@
             <p>age: <input id="stuAge" name="age" type="text"><br>
                 <input type="submit" value="提交修改">
         </form>
+        <h1>添加学生</h1>
         <div>
-            <h1>添加学生</h1>
-            <form th:action="@{/addStuInfo}" method="post">
-                <p>Name: <input id="stuNameAdd" name="name" type="text">
-                <p>sex: <input id="stuSexAdd" name="sex" type="text"> &nbsp;&nbsp;&nbsp;
-                <p>age: <input id="stuAgeAdd" name="age" type="text"><br>
+            <form th:action="@{/addStuInfo}" method="post" style="display: flex">
+                <div style="flex: 1;">
+                    Name: <input id="stuNameAdd" name="name" type="text"><br>
+                    Sex: <input id="stuSexAdd" name="sex" type="text"><br>
+                    Age: <input id="stuAgeAdd" name="age" type="text"><br>
                     <input type="submit" value="添加学生">
+                </div>
+                <div style="flex: 2;">
+                    成绩： <select style="width: 80px" name="cid">
+                    <option th:each="msg:${allCourse}"
+                            th:text="${msg.getTitle()}" th:value="${msg.getId()}"></option>
+                </select>
+                    分数：<input id="addStuCourse" name="score" type="text"><br>
+                </div>
             </form>
         </div>
     </div>
     <div style="flex: 1">
-        <h1>添加成绩</h1>
+        <h1>编辑成绩</h1>
+        <p>ID: <span id="editID"></span>&nbsp;&nbsp;Name:<span id="editName"></span></p>
+        <select v-if="stuData.length>1" v-model="stuData">
+            <option v-for="(item,index) in stuData" :key="index" :label="item.course.title"
+                    :value="item.course.title"></option>
+        </select>
+        <!--                <select>-->
+        <!--                    <option th:each="msg:${stuScore}"-->
+        <!--                            th:text="${msg.getCourse().getTitle()}" th:value="${msg.getCourse().getTitle()}"></option>-->
+        <!--                </select>-->
     </div>
 </div>
-
-
 </body>
-<script th:inline="javascript">
 
+
+<script th:inline="javascript">
 
     function changeStuInfo(msg) {
         var studentId = msg.getAttribute('data-id');
@@ -79,6 +102,7 @@
         document.getElementById("stuAge").value = studentAge
     }
 
+    //删除
     function deleteStu(id) {
         if (confirm("确定要删除ID:" + id + "吗？")) {
             var xhr = new XMLHttpRequest();
@@ -89,5 +113,45 @@
             }, 1600);
         }
     }
+
+    function getStuID(id, name) {
+        document.getElementById("editID").innerText = id
+        document.getElementById("editName").innerText = name
+        getScore(id)
+    }
+
+    //获取成绩
+
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            stuData: '',
+        }
+        ,
+        mounted() {
+            // 将Vue方法传到全局对象window中
+            window.getScore = this.getScore
+        },
+        methods: {
+            getScore(id) {
+                const data = {"sid": id};
+                axios({
+                    method: 'post',
+                    url: '/getStuScore',
+                    header: {
+                        'Content-Type': 'application/json'
+                    },
+                    data: data,
+                }).then(response => {
+                    this.stuData = response.data;
+                    console.log(this.stuData);
+                });
+            }
+        }
+    })
+
+
 </script>
+
 </html>

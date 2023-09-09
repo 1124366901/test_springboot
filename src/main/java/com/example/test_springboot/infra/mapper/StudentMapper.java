@@ -17,4 +17,6 @@ public interface StudentMapper {
     void deleteStu(Integer id);
 
     void addStu(Student student);
+
+    Student getStuByName(String name);
 }

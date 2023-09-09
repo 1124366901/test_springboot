@@ -14,4 +14,6 @@ public interface StudentService {
     void deleteStu(Integer id);
 
     void addStu(Student student);
+
+    Student getStuByName(String name);
 }

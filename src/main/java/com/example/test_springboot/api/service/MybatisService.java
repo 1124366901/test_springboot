@@ -16,5 +16,7 @@ public interface MybatisService {
 
     void insertScore(List<Achievement> achievements);
 
+    void addStuAndScore(Student student,Achievement achievement);
+
 
 }

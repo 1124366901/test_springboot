@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.test_springboot.infra.mapper.CourseMapper">
+
+    <resultMap id="course" type="com.example.test_springboot.domain.entity.Course">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="tid" property="tid"/>
+    </resultMap>
+    <!--    选择全部课程-->
+    <select id="selAll" resultMap="course">
+        select *
+        from course;
+    </select>
+
+
+</mapper>

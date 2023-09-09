@@ -16,6 +16,11 @@
         SELECT *
         FROM student
     </select>
+    <!--    获取学生-->
+    <select id="getStuByName" resultMap="stu">
+        SELECT *
+        FROM student where name=#{name}
+    </select>
 
     <!--    修改学生信息-->
     <update id="changeInfo">

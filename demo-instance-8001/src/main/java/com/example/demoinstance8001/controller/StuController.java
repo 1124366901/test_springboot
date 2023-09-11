@@ -2,6 +2,7 @@ package com.example.demoinstance8001.controller;
 
 
 import com.example.demoinstance8001.entity.Student;
+import com.example.demoinstance8001.service.FeignService;
 import com.example.demoinstance8001.service.StudentService;
 import com.example.demoinstance8001.service.StudentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,9 @@ public class StuController {
     @Value("${server.port}")
     private String serverPort;
 
+    @Autowired
+    private FeignService feignService;
+
     @RequestMapping(value = "/stu/get/{id}", method = RequestMethod.GET)
     public Student get(@PathVariable("id") int id) {
         return stuService.getStuByID(id);
@@ -28,5 +32,10 @@ public class StuController {
     @RequestMapping(value = "/stu/all", method = RequestMethod.GET)
     public List<Student> list() {
         return stuService.getAllStu();
+    }
+
+    @RequestMapping(value = "/stu/feign", method = RequestMethod.GET)
+    public List<Student> feignAll() {
+        return feignService.getAll();
     }
 }

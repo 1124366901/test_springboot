@@ -71,3 +71,9 @@
 ![image](https://github.com/1124366901/test_springboot/assets/109325641/852dacc5-4a25-4d4d-b399-576df7c72927)
 ![image](https://github.com/1124366901/test_springboot/assets/109325641/23d819c8-cf29-4597-b61d-7eb82d9e834d)
 
+
+gateway网关注册
+![image](https://github.com/1124366901/test_springboot/assets/109325641/e4d5722b-135c-438f-ad38-7df159d8ecfc)
+![image](https://github.com/1124366901/test_springboot/assets/109325641/daaa8a13-8492-4bad-95cb-a1f51a4642a0)
+![image](https://github.com/1124366901/test_springboot/assets/109325641/9382ddcc-233e-412d-83d5-7d83a75153e9)
+

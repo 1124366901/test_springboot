@@ -65,3 +65,9 @@
 
 ![image](https://github.com/1124366901/test_springboot/assets/109325641/2932828c-cfd5-4be8-a0db-b96c72c01d24)
 
+
+接口服务调用：
+![image](https://github.com/1124366901/test_springboot/assets/109325641/2d079074-13d0-4d77-afbf-23b1e85b8ac8)
+![image](https://github.com/1124366901/test_springboot/assets/109325641/852dacc5-4a25-4d4d-b399-576df7c72927)
+![image](https://github.com/1124366901/test_springboot/assets/109325641/23d819c8-cf29-4597-b61d-7eb82d9e834d)
+

@@ -1,0 +1,10 @@
+server:
+  port: 8089
+spring:
+  application:
+    name: springcloud-config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/1124366901/springcloud-config.git

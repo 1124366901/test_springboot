@@ -1,0 +1,21 @@
+eureka:
+  instance:
+    instance-id: spring-cloud-provider-8001
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://demo-eureka-7001:7001/eureka/,http://demo-eureka-7002:7002/eureka/,http://demo-eureka-7003:7003/eureka/
+#     register-with-eureka: true
+#     fetch-registry: true
+server:
+  port: 8001
+spring:
+  application:
+    name: microServiceCloudProviderDept
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.56.201:3306/springboot_test?useUnicode=true&characterEncoding=utf8
+    username: hzero
+    password: Q4E%kizUy2#m
+mybatis:
+  mapper-locations: classpath*:/mybatis/*.xml

@@ -1,28 +1,23 @@
 package com.example.test_springboot.controller;
 
-import com.alibaba.fastjson2.JSON;
 import com.example.test_springboot.api.service.impl.AchievementServiceImpl;
 import com.example.test_springboot.api.service.impl.CourseServiceImpl;
 import com.example.test_springboot.api.service.impl.MybatisServiceImpl;
 import com.example.test_springboot.api.service.impl.StudentServiceImpl;
 import com.example.test_springboot.domain.entity.Achievement;
-import com.example.test_springboot.domain.entity.Course;
 import com.example.test_springboot.domain.entity.Student;
 import com.example.test_springboot.domain.entity.student.StudentTranscript;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import netscape.javascript.JSObject;
-import org.springframework.boot.configurationprocessor.json.JSONArray;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -39,6 +34,9 @@ public class ThymeleafController {
 
     @Resource
     private AchievementServiceImpl achievementService;
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     @RequestMapping({"/", "index"})
     public String main(Model model, HttpSession session) {

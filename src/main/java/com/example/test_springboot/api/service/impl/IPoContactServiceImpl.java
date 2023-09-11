@@ -10,11 +10,13 @@ public class IPoContactServiceImpl implements IPoContactService {
 
 //    @Autowired
 //    private IPoContactRepository poContactRepository;
+
     @Autowired
     private RestTemplate restTemplate;
 
     @Override
     public String getInstanceInfo(Long contactId) {
+
 
         return null;
     }

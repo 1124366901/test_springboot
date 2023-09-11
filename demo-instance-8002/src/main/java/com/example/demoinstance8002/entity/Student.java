@@ -1,4 +1,4 @@
-package com.example.test_springboot.domain.entity;
+package com.example.demoinstance8002.entity;
 
 
 import lombok.Data;
@@ -21,4 +21,6 @@ public class Student implements Serializable {
     private String sex;
 
     private Integer age;
+
+    private static final long serialVersionUID = 1L;
 }

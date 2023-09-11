@@ -1,5 +1,6 @@
 package com.example.test_springboot.api.service.config;
 
+
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

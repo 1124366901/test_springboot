@@ -58,6 +58,10 @@
 集群搭建以及测试：
 ![image](https://github.com/1124366901/test_springboot/assets/109325641/a5aa9ac0-d96f-4cd8-ad4c-5d8c6b19d0ed)
 
+
 负载均衡，生产者提供服务，消费者使用服务
+两个服务提供，两个不同的数据库
 ![image](https://github.com/1124366901/test_springboot/assets/109325641/7a4141a5-1dfd-491e-9ed0-a91cde4d2ce3)
+
+![image](https://github.com/1124366901/test_springboot/assets/109325641/2932828c-cfd5-4be8-a0db-b96c72c01d24)
 

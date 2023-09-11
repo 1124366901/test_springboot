@@ -1,6 +1,7 @@
 package com.example.test_springboot.controller;
 
 import com.example.test_springboot.domain.entity.Student;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ public class StuController_Consumer {
 
     @Autowired
     private RestTemplate restTemplate;
+
 
     @RequestMapping(value = "/consumer/stu/get/{id}")
     public Student get(@PathVariable("id") Integer id){

@@ -9,7 +9,6 @@ import com.example.test_springboot.domain.entity.Course;
 import com.example.test_springboot.domain.entity.Student;
 import com.example.test_springboot.domain.entity.student.StudentTranscript;
 import com.fasterxml.jackson.annotation.JsonAlias;
-import com.google.inject.Module;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.ui.Model;

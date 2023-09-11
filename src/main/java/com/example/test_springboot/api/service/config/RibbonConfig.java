@@ -14,4 +14,10 @@ public class RibbonConfig {
     public RestTemplate getRestTemplate() {
         return new RestTemplate();
     }
+
+//    @Bean
+//    public IRule myRule(){
+//        return new RandomRule();
+//    }
+
 }

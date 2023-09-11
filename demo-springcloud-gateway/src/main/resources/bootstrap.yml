@@ -1,0 +1,21 @@
+server:
+  port: 8088
+spring:
+  application:
+    name: springcloud-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://demo-eureka-7001:7001/eureka/,http://demo-eureka-7002:7002/eureka/,http://demo-eureka-7003:7003/eureka/
+  instance:
+    instance-id: gateway8088.com
+    prefer-ip-address: true
+
